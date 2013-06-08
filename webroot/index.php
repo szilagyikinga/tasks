@@ -6,7 +6,6 @@ define('ROOT', dirname(WEBROOT));
 define('DS', DIRECTORY_SEPARATOR);
 define('CORE', ROOT . DS . 'core');
 define('BASE_URL', dirname(dirname($_SERVER['SCRIPT_NAME'])));
-define('URL_ROOT', "http://localhost/tasks");
 
 require CORE . DS . 'includes.php';
 new Dispatcher();

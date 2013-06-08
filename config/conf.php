@@ -14,6 +14,8 @@ class Conf{
 	);
 }
 
+    define('URL_ROOT', "http://localhost/tasks");
+
     Router::prefix('cockpit','admin');
 
 

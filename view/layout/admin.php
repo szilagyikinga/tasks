@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href ="<?php echo(URL_ROOT . DS . 'bootstrap/css/bootstrap.css');?>" rel="stylesheet" media="screen">
+    <link href ="<?php echo Router::url('bootstrap/css/bootstrap.css');?>" rel="stylesheet" media="screen">
 </head>
 <body>
 

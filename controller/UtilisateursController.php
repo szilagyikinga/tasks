@@ -48,7 +48,7 @@ class UtilisateursController extends Controller{
                     $this->request->data->pwd = sha1($this->request->data->pwd);
                     $this->request->data->token = sha1(uniqid(rand()));
                     $this->Utilisateur->save($this->request->data);
-                    $lien ='<a href="http://localhost/tasks/utilisateurs/activate?token='.
+                    $lien ='<a href="' . Router::url('utilisateurs/activate?token=') .
                         $this->request->data->token.'&email='.$this->request->data->email.'">Activation du compte</a>';
 
                     $this->Session->setFlash('Votre compte à bien été créé. Lien d\'activation : '.$lien);
