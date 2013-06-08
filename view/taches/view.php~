@@ -1,0 +1,4 @@
+<div class="hero-unit">
+	<h1><?php echo $tache->nom; ?></h1>
+	<p><?php echo $tache->contenu; ?></p>
+</div>

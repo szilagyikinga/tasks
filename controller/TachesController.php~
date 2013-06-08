@@ -1,0 +1,18 @@
+<?php
+class TachesController extends Controller{
+
+	public function view($id){
+		$this->loadModel('Tache');
+		$t['tache'] = $this->Tache->findFirst(array(
+			'conditions'=>array('id'=>$id)
+		));
+		if(empty($t['tache'])){
+			$this->e404('Page introuvable');
+		}
+		$t['taches'] = $this->Tache->find(array(
+			'conditions'=>array('id'=>$id)
+		));
+		$this->set($t);
+	}
+
+}
