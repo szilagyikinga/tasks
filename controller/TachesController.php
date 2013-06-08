@@ -13,9 +13,8 @@ class TachesController extends Controller{
         $perPage = 20;
         $t['commentaires'] = $this->Commentaire->find(array(
             'conditions'=>array('id_tache'=>$id),
-            'join'=>array('utilisateurs'=>'Commentaire.id_utilisateur=utilisateurs.id'),
             'limit' => ($perPage*($this->request->page-1)).','.$perPage,
-            'order desc' =>'Commentaire.id'
+            'order desc' =>'id'
         ));
         $t['total'] = $this->Commentaire->findCount(array('id_tache'=>$id));
         $t['page'] = ceil($t['total'] / $perPage);
@@ -41,8 +40,6 @@ class TachesController extends Controller{
         $perPage = 10;
         $this->loadModel('Tache');
         $t['taches'] = $this->Tache->find(array(
-            'fields'=>'Tache.id, Tache.date_limite, Tache.nom, Tache.en_ligne, Tache.attribution_acceptee, utilisateurs.login',
-            'join'=>array('utilisateurs'=>'Tache.id_responsable=utilisateurs.id'),
             'limit' => ($perPage*($this->request->page-1)).','.$perPage,
             'order' =>'date_limite'
         ));
@@ -63,7 +60,6 @@ class TachesController extends Controller{
         $t['id']='';
         if($this->request->data){
             if($this->Tache->validates($this->request->data)){
-                $this->request->data->date_creation = date('Y-m-d');
                 $this->Tache->save($this->request->data);
                 $this->Session->setFlash('Le contenu a bien été modifié');
                 $this->redirect('admin/taches/index');
@@ -73,15 +69,19 @@ class TachesController extends Controller{
             }
         }elseif($id){
             $this->request->data =$this->Tache->findFirst(array(
-                'fields'=>'Tache.id, Tache.date_limite, Tache.nom, Tache.en_ligne,Tache.slug, Tache.contenu,  utilisateurs.login',
-                'join'=>array('utilisateurs'=>'Tache.id_responsable=utilisateurs.id'),
-                'conditions' => array('Tache.id'=>$id)
+                'conditions' => array('id'=>$id)
             ));
             $t['id']=$id;
         }
         $this->loadModel('Utilisateur');
-        $t['utilisateurs'] = $this->Utilisateur->find(array('fields' =>'login'));
+        $utilisateurs = array();
+        $users = $this->Utilisateur->find(array('fields' =>'login'));
+        foreach($users as $v){
+            $utilisateurs[] = $v->login;
+        }
+        $t['utilisateurs'] = $utilisateurs;
         $this->set($t);
+
     }
 
 }

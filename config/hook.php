@@ -12,12 +12,12 @@ if(Cookie::getCookie('auth')||!$this->Session->isLogged()){
     $auth = explode('-----', $auth);
     $this->loadModel('Utilisateur');
     $user = $this->Utilisateur->findFirst(array(
-        'conditions' => array('id' => $auth[0]
+        'conditions' => array('login' => $auth[0]
         )));
     $key = sha1($user->login.$user->pwd.$_SERVER['REMOTE_ADDR']);
     if($key==$auth[1]){
         $this->Session->write('User',$user);
-        Cookie::set('auth', $user->id, '-----', $key, 3);
+        Cookie::set('auth', $user->login, '-----', $key, 3);
 
     }else{
         Cookie::delete('auth');

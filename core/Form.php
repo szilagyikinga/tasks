@@ -34,8 +34,8 @@ class Form{
 			$html .= '<input type="text" id="input'.$name.'" name="'.$name.'" value="'.$value.'"'.$attr.'>';
 		}elseif(isset($options['options'])){
 			$html .= '<select id="input'.$name.'" name="'.$name.'">';
-			foreach($options['options'] as $k=>$v){
-				$html .= '<option value="'.$k.'" '.($k==$value?'selected':'').'>'.$v.'</option>'; 
+			foreach($options['options'] as $v){
+				$html .= '<option value="'.$v.'" '.($v==$value?'selected':'').'>'.$v.'</option>';
 			}
 			$html .= '</select>'; 
 		}elseif($options['type'] == 'textarea'){
@@ -48,19 +48,7 @@ class Form{
 			$html .= '<input type="file" class="input-file" id="input'.$name.'" name="'.$name.'"'.$attr.'>';
 		}elseif($options['type'] == 'password'){
 			$html .= '<input type="password" id="input'.$name.'" name="'.$name.'" value="'.$value.'"'.$attr.'>';
-		}elseif($options['type'] == 'select'){
-            $html .= '<select name="'.$name.'">';
-            foreach($select as $k=>$v){
-                if($k==$value){
-                    $html .= '<option value="'.$k.'" selected="selected">'.$v.'</option>';
-                }else{
-                    $html .= '<option value="'.$k.'">'.$v.'</option>';
-                }
-
-            }
-            $html .='</select>';
-        }
-
+		}
 		if($error){
 			$html .= '<span class="help-inline">'.$error.'</span>';
 		}

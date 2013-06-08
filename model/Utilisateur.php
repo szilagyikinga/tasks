@@ -1,5 +1,6 @@
 <?php
 class Utilisateur extends Model{
+
     var $validate = array(
         'login' => array(
             'rule' => 'notEmpty',

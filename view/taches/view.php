@@ -19,7 +19,7 @@
 </div>
 <?php foreach ($commentaires as $k => $v): ?>
   <div class="lead">
-      <strong><?php echo "$v->login" ?></strong>
+      <strong><?php echo "$v->utilisateur" ?></strong>
       <em><?php echo "$v->date_creation" ?></em><br/>
       <?php echo "$v->commentaire"; ?>
   </div>

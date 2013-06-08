@@ -20,7 +20,7 @@
                 <td><span class="label label-<?php echo ($v->en_ligne==1)?'success':'warning'; ?>"><?php echo ($v->en_ligne==1)?'En ligne':'Hors ligne'; ?></span</td>
                 <td><?php echo $v->date_limite;?></td>
                 <td><?php echo $v->nom;?></td>
-                <td><?php echo $v->login;?></td>
+                <td><?php echo $v->responsable;?></td>
                 <td><span class="label label-<?php echo ($v->attribution_validee==1)?'success':'warning'; ?>"><?php echo ($v->attribution_validee==1)?'Oui':'Non'; ?></span</td>
                 <td>
                     <a href="<?php echo Router::url('admin/taches/edit/'.$v->id); ?>">Editer</a>

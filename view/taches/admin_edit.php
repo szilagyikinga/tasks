@@ -9,7 +9,7 @@
     <?php echo $this->Form->input('id','hidden'); ?>
     <?php echo $this->Form->input('contenu','Contenu',array('type'=>'textarea','class'=>'input-xxlarge','rows'=>3)); ?>
     <?php echo $this->Form->input('date_limite','Date limite',array('type'=>'date')); ?>
-    <?php echo $this->Form->input('login', 'Responsable', array('type'=>'select')); ?>
+    <?php echo $this->Form->input('responsable', 'Responsable', array('options'=>$utilisateurs )); ?>
 
     <div class="actions">
         <input type="submit" class="btn primary" value="Envoyer">

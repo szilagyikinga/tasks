@@ -14,7 +14,7 @@ class UtilisateursController extends Controller{
                         if($user->actif==1){
                             $this->Session->write('User',$user);
                             if($data->remember==1){
-                                Cookie::set('auth', $user->id, '-----', sha1($user->login.$user->pwd.$_SERVER['REMOTE_ADDR']), 3);
+                                Cookie::set('auth', $user->login, '-----', sha1($user->login.$user->pwd.$_SERVER['REMOTE_ADDR']), 3);
                             }
 
                         }else{
@@ -40,11 +40,14 @@ class UtilisateursController extends Controller{
         if($this->request->data){
             $this->loadModel('Utilisateur');
             if($this->Utilisateur->validates($this->request->data)){
-                //on vérifie si l'adresse email est déjà prise
+                //on vérifie l'existance de l'adresse email et de l'identifiant dans la base
                 $email = $this->Utilisateur->findFirst(array(
                     'conditions' => array('email' => $this->request->data->email
                     )));
-                if(empty($email)){
+                $login = $this->Utilisateur->findFirst(array(
+                    'conditions' => array('login' => $this->request->data->login
+                    )));
+                if(empty($email) && empty($login)){
                     $this->request->data->pwd = sha1($this->request->data->pwd);
                     $this->request->data->token = sha1(uniqid(rand()));
                     $this->Utilisateur->save($this->request->data);
@@ -52,11 +55,10 @@ class UtilisateursController extends Controller{
                         $this->request->data->token.'&email='.$this->request->data->email.'">Activation du compte</a>';
 
                     $this->Session->setFlash('Votre compte à bien été créé. Lien d\'activation : '.$lien);
-                    $this->request->data->pwd = '';
                 }else{
-                    $this->Session->setFlash('Il existe déjà un compte pour cette adresse email <a href="#">Mot de passe oublié</a> ', 'error');
-                    $this->request->data->pwd = '';
+                    $this->Session->setFlash('Il existe déjà un compte avec l\'identifiant et/ou l\'adresse email', 'error');
                 }
+                $this->request->data->pwd = '';
             }else{
                 $this->Session->setFlash('Merci de corriger vos informations', 'error');
             }

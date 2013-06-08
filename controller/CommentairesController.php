@@ -11,7 +11,7 @@ class CommentairesController extends Controller{
                 if($this->Commentaire->validates($this->request->data)){
                     $this->request->data->date_creation = date('Y-m-d h:i:s');
                     $this->request->data->id_tache = $id;
-                    $this->request->data->id_utilisateur= $this->Session->user('id');
+                    $this->request->data->utilisateur= $this->Session->user('login');
                     $this->Commentaire->save($this->request->data);
                     $this->Session->setFlash('Votre commentaire à bien été sauvegardé');
                 }else{
