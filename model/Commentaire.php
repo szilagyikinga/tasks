@@ -1,5 +1,6 @@
 <?php
-class Commentaire extends Model{
+class Commentaire extends Model
+{
     var $validate = array(
         'commentaire' => array(
             'rule' => 'notEmpty',

@@ -1,21 +1,22 @@
 <?php
-class Conf{
-	
-	static $debug = 1; 
+class Conf
+{
 
-	static $databases = array(
+    static $debug = 1;
 
-		'default' => array(
-			'host'		=> 'localhost',
-			'database'	=> 'tasks',
-			'login'		=> 'root',
-			'password'	=> ''
-		)
-	);
+    static $databases = array(
+
+        'default' => array(
+            'host' => 'localhost',
+            'database' => 'tasks',
+            'login' => 'root',
+            'password' => ''
+        )
+    );
 }
 
-    define('URL_ROOT', "http://localhost/tasks");
+define('URL_ROOT', "http://localhost/tasks");
 
-    Router::prefix('cockpit','admin');
+Router::prefix('cockpit', 'admin');
 
 
